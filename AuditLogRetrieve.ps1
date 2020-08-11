@@ -4,8 +4,8 @@
 #################################### Configuration Section ###################################################
 $logFile = "UAL_All.log"
 $outputFile = "UnifiedAuditLog_All.csv"
-#[DateTime]$start = (Get-Date).AddDays(-90)
-[DateTime]$start = '07/09/2020 03:16:13'
+[DateTime]$start = (Get-Date).AddDays(-90)
+#[DateTime]$start = '07/09/2020 03:16:13'
 [DateTime]$end = Get-Date
 $resultSize = 1000
 $intervalMinutes = 6
