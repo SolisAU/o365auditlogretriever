@@ -2,15 +2,15 @@
 #Connect-ExchangeOnline
 
 #################################### Configuration Section ###################################################
-$logFile = "UAL_All.log"
-$outputFile = "UnifiedAuditLog_All.csv"
-#[DateTime]$start = (Get-Date).AddDays(-90)
-[DateTime]$start = '07/09/2020 03:16:13'
+$logFile = "MAL_All.log"
+$outputFile = "MailboxAuditLog_All.csv"
+[DateTime]$start = (Get-Date).AddDays(-90)
+#[DateTime]$start = '06/30/2020 22:36:13'
 [DateTime]$end = Get-Date
 $resultSize = 1000
-$intervalMinutes = 6
+$intervalMinutes = 360
 $retryCount = 3
-Write-Output "[***] Retrieving Office 365 logs from $($start) till $($end) [***]"
+Write-Output "[***] Retrieving Mailbox Audit logs from $($start) till $($end) [***]"
 #################################### End Configuration Section ###################################################
 [DateTime]$currentStart = $start
 [DateTime]$currentEnd = $start
@@ -32,19 +32,19 @@ while ($true)
     }
     $currentTries = 0
     $sessionID = [DateTime]::Now.ToString().Replace('/', '_')
-    Write-LogFile "INFO: Retrieving audit logs between $($currentStart) and $($currentEnd)"
-    Write-Output "INFO: Retrieving audit logs between $($currentStart) and $($currentEnd)"
+    Write-LogFile "INFO: Retrieving mailbox audit logs between $($currentStart) and $($currentEnd)"
+    Write-Output "INFO: Retrieving mailbox audit logs between $($currentStart) and $($currentEnd)"
     $currentCount = 0
     while ($true)
     {
-        [Array]$results = Search-UnifiedAuditLog -StartDate $currentStart -EndDate $currentEnd -SessionId $sessionID -SessionCommand ReturnNextPreviewPage -ResultSize $resultSize
+        [Array]$results = Search-MailboxAuditLog -StartDate $currentStart -EndDate $currentEnd -ShowDetails -IncludeInactiveMailbox -ResultSize $resultSize
         if ($results -eq $null -or $results.Count -eq 0)
         {
             #Retry if needed. This may be due to a temporary network glitch
             if ($currentTries -lt $retryCount)
             {
                 $currentTries = $currentTries + 1
-                #Start-Sleep -Milliseconds 5
+                Start-Sleep -Milliseconds 5
                 continue
             }
             else
