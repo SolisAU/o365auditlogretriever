@@ -21,18 +21,6 @@ Files will be written to current directory.
 
 ## Tweaking Settings
 
-In the header of each file is a section like this:
+No longer valid. Run with `-help` for more information.
 
-  [DateTime]$start = (Get-Date).AddDays(-90)
-
-  #[DateTime]$start = '06/30/2020 22:36:13'
-
-  [DateTime]$end = Get-Date
-
-  $resultSize = 1000
-
-  $intervalMinutes = 720
-
-  $retryCount = 3
-
-These values can be used to changed if you need to filter down the window of retrieval, or need to pick out a specific time period. In most cases you shouldn't need to tweak these, however the `intervalMinutes` may need to be adjusted for very large environments. Code is currently set to retrieve up to a maximum of 5,000 records (in 1,000 record batches) in 6 minute increments.
+Script will scale up and scale down (double or half, appropriately) the interval between the searches to ensure the results being returned are less than 5,000 records to avoid losing data.
