@@ -1,6 +1,6 @@
 # PowerShell Microsoft 365 Log Retrieval Scripts
 
-Repo contains three (3) scripts to collect the various Microsoft 365 audit logs
+Repo contains ~three (3)~ one script~s~ to collect the various Microsoft 365 audit logs
 * Unified Audit Log
 * Admin Audit Log
 * Mailbox Audit Log
@@ -13,7 +13,8 @@ Next connect to the Microsoft 365 tenancy.
 
 `Connect-ExchangeOnline`
 
-Then run `AdminLogRetrieve.ps1` to retrieve the last 90 days of the Admin Audit Log; `AuditLogRetrieve.ps1` for the last 90 days of the Unified Audit Log; and `MailboxLogRetrieve.ps1` for the last 90 days of the Mailbox Audit Log.
+~Then run `AdminLogRetrieve.ps1` to retrieve the last 90 days of the Admin Audit Log; `AuditLogRetrieve.ps1` for the last 90 days of the Unified Audit Log; and `MailboxLogRetrieve.ps1` for the last 90 days of the Mailbox Audit Log.~
+Then run `AuditLogRetrieve.ps1` for the last 90 days of the Unified Audit Log; or add `-start`, `-date` and/or `-logtype` to be more specific. `-help` to get help.
 
 Files will be written to current directory.
 
